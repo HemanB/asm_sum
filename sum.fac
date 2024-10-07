@@ -1,0 +1,24 @@
+set $0,r0   ;sum
+set $0,r1   ;input_index
+set $0,r2   ;output_index
+set $0,r3   ;temp_value
+set $0,r4   ;temp_size
+set $1,r5   ;increment
+ldi (r1),r3 ;store input_value in temp_value
+bez r3,$14  ;if temp_value is zero, skip addition
+mov r15,r4  ;move input_size to temp_size
+sub r1,r4   ;subtract input_index from input_size
+bez r4,$23  ;if temp_size is now zero, end
+add r3,r0   ;add temp_value to sum
+add r5,r1   ;increment input_index
+jmp 0,$6    ;repeat loop
+sto r0,(r2) ;store sum in output
+set $0,r0   ;reset sum
+add r5,r1   ;increment input_index
+add r5,r2   ;increment output_index
+mov r15,r4  ;move input_size to temp_size
+sub r1,r4   ;subtract input_index from temp_size
+bez r4,$23  ;if temp_size is now zero, end
+ldi (r1),r3 ;store input_value in temp_value
+jmp 0,$6    ;repeat loop
+fin 0,0     ;end (in french)
